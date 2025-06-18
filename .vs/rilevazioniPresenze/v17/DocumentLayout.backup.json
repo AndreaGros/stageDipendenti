@@ -1,0 +1,180 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\andre\\Desktop\\rilevazioniPresenze\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{249B71DA-CBAA-4D39-9A45-D95E4ED77DBD}|rilevazioniPresenzaData\\rilevazioniPresenzaData.csproj|c:\\users\\andre\\desktop\\rilevazionipresenze\\rilevazionipresenzadata\\reps\\userfiles\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{249B71DA-CBAA-4D39-9A45-D95E4ED77DBD}|rilevazioniPresenzaData\\rilevazioniPresenzaData.csproj|solutionrelative:rilevazionipresenzadata\\reps\\userfiles\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{249B71DA-CBAA-4D39-9A45-D95E4ED77DBD}|rilevazioniPresenzaData\\rilevazioniPresenzaData.csproj|c:\\users\\andre\\desktop\\rilevazionipresenze\\rilevazionipresenzadata\\rilevazionepresenzacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{249B71DA-CBAA-4D39-9A45-D95E4ED77DBD}|rilevazioniPresenzaData\\rilevazioniPresenzaData.csproj|solutionrelative:rilevazionipresenzadata\\rilevazionepresenzacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{249B71DA-CBAA-4D39-9A45-D95E4ED77DBD}|rilevazioniPresenzaData\\rilevazioniPresenzaData.csproj|c:\\users\\andre\\desktop\\rilevazionipresenze\\rilevazionipresenzadata\\reps\\userfiles\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{249B71DA-CBAA-4D39-9A45-D95E4ED77DBD}|rilevazioniPresenzaData\\rilevazioniPresenzaData.csproj|solutionrelative:rilevazionipresenzadata\\reps\\userfiles\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25D2AA5D-C179-410D-87D0-B45BAD822581}|rilevazioniPresenze\\rilevazioniPresenze.csproj|c:\\users\\andre\\desktop\\rilevazionipresenze\\rilevazionipresenze\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25D2AA5D-C179-410D-87D0-B45BAD822581}|rilevazioniPresenze\\rilevazioniPresenze.csproj|solutionrelative:rilevazionipresenze\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25D2AA5D-C179-410D-87D0-B45BAD822581}|rilevazioniPresenze\\rilevazioniPresenze.csproj|c:\\users\\andre\\desktop\\rilevazionipresenze\\rilevazionipresenze\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25D2AA5D-C179-410D-87D0-B45BAD822581}|rilevazioniPresenze\\rilevazioniPresenze.csproj|solutionrelative:rilevazionipresenze\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{249B71DA-CBAA-4D39-9A45-D95E4ED77DBD}|rilevazioniPresenzaData\\rilevazioniPresenzaData.csproj|c:\\users\\andre\\desktop\\rilevazionipresenze\\rilevazionipresenzadata\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{249B71DA-CBAA-4D39-9A45-D95E4ED77DBD}|rilevazioniPresenzaData\\rilevazioniPresenzaData.csproj|solutionrelative:rilevazionipresenzadata\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25D2AA5D-C179-410D-87D0-B45BAD822581}|rilevazioniPresenze\\rilevazioniPresenze.csproj|c:\\users\\andre\\desktop\\rilevazionipresenze\\rilevazionipresenze\\rilevazionipresenze.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{25D2AA5D-C179-410D-87D0-B45BAD822581}|rilevazioniPresenze\\rilevazioniPresenze.csproj|solutionrelative:rilevazionipresenze\\rilevazionipresenze.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/localhost/rilevazioniPresenze/Andre/SqlTable/dbo.Users.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25D2AA5D-C179-410D-87D0-B45BAD822581}|rilevazioniPresenze\\rilevazioniPresenze.csproj|c:\\users\\andre\\desktop\\rilevazionipresenze\\rilevazionipresenze\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{25D2AA5D-C179-410D-87D0-B45BAD822581}|rilevazioniPresenze\\rilevazioniPresenze.csproj|solutionrelative:rilevazionipresenze\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/localhost/rilevazioniPresenze/Andre/SqlTable/dbo.__EFMigrationsHistory.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\rilevazioniPresenze\\rilevazioniPresenzaData\\Reps\\UserFiles\\UserRepository.cs",
+              "RelativeDocumentMoniker": "rilevazioniPresenzaData\\Reps\\UserFiles\\UserRepository.cs",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\rilevazioniPresenze\\rilevazioniPresenzaData\\Reps\\UserFiles\\UserRepository.cs*",
+              "RelativeToolTip": "rilevazioniPresenzaData\\Reps\\UserFiles\\UserRepository.cs*",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAYwBQAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-17T09:09:19.78Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RilevazionePresenzaContext.cs",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\rilevazioniPresenze\\rilevazioniPresenzaData\\RilevazionePresenzaContext.cs",
+              "RelativeDocumentMoniker": "rilevazioniPresenzaData\\RilevazionePresenzaContext.cs",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\rilevazioniPresenze\\rilevazioniPresenzaData\\RilevazionePresenzaContext.cs",
+              "RelativeToolTip": "rilevazioniPresenzaData\\RilevazionePresenzaContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-17T07:36:29.744Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IUserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\rilevazioniPresenze\\rilevazioniPresenzaData\\Reps\\UserFiles\\IUserRepository.cs",
+              "RelativeDocumentMoniker": "rilevazioniPresenzaData\\Reps\\UserFiles\\IUserRepository.cs",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\rilevazioniPresenze\\rilevazioniPresenzaData\\Reps\\UserFiles\\IUserRepository.cs*",
+              "RelativeToolTip": "rilevazioniPresenzaData\\Reps\\UserFiles\\IUserRepository.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-17T09:10:54.538Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\rilevazioniPresenze\\rilevazioniPresenze\\Program.cs",
+              "RelativeDocumentMoniker": "rilevazioniPresenze\\Program.cs",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\rilevazioniPresenze\\rilevazioniPresenze\\Program.cs",
+              "RelativeToolTip": "rilevazioniPresenze\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-17T09:03:33.885Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\rilevazioniPresenze\\rilevazioniPresenzaData\\Models\\User.cs",
+              "RelativeDocumentMoniker": "rilevazioniPresenzaData\\Models\\User.cs",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\rilevazioniPresenze\\rilevazioniPresenzaData\\Models\\User.cs",
+              "RelativeToolTip": "rilevazioniPresenzaData\\Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-17T07:56:09.465Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\rilevazioniPresenze\\rilevazioniPresenze\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "rilevazioniPresenze\\Controllers\\UserController.cs",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\rilevazioniPresenze\\rilevazioniPresenze\\Controllers\\UserController.cs*",
+              "RelativeToolTip": "rilevazioniPresenze\\Controllers\\UserController.cs*",
+              "ViewState": "AgIAABgAAAAAAAAAAAAYwCMAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-17T08:31:48.347Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "rilevazioniPresenze.csproj",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\rilevazioniPresenze\\rilevazioniPresenze\\rilevazioniPresenze.csproj",
+              "RelativeDocumentMoniker": "rilevazioniPresenze\\rilevazioniPresenze.csproj",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\rilevazioniPresenze\\rilevazioniPresenze\\rilevazioniPresenze.csproj",
+              "RelativeToolTip": "rilevazioniPresenze\\rilevazioniPresenze.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-06-18T09:21:32.534Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "dbo.Users [Dati]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/localhost/rilevazioniPresenze/Andre/SqlTable/dbo.Users.sql",
+              "ToolTip": "dbo.Users [Dati]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-06-18T06:41:38.047Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\andre\\Desktop\\rilevazioniPresenze\\rilevazioniPresenze\\appsettings.json",
+              "RelativeDocumentMoniker": "rilevazioniPresenze\\appsettings.json",
+              "ToolTip": "C:\\Users\\andre\\Desktop\\rilevazioniPresenze\\rilevazioniPresenze\\appsettings.json",
+              "RelativeToolTip": "rilevazioniPresenze\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAACQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-17T09:18:01.65Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "dbo.__EFMigrationsHistory.sql",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/localhost/rilevazioniPresenze/Andre/SqlTable/dbo.__EFMigrationsHistory.sql",
+              "ToolTip": "ViewDataWindow_MSSQL__/localhost/rilevazioniPresenze/Andre/SqlTable/dbo.__EFMigrationsHistory.sql",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-06-17T08:58:23.549Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+@rilevazioniPresenze_HostAddress = http://localhost:5167
+
+GET {{rilevazioniPresenze_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

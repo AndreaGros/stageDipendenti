@@ -1,0 +1,14 @@
+C:\Users\andre\Desktop\rilevazioniPresenze\rilevazioniPresenzaData\bin\Debug\net8.0\rilevazioniPresenzaData.deps.json
+C:\Users\andre\Desktop\rilevazioniPresenze\rilevazioniPresenzaData\bin\Debug\net8.0\rilevazioniPresenzaData.runtimeconfig.json
+C:\Users\andre\Desktop\rilevazioniPresenze\rilevazioniPresenzaData\bin\Debug\net8.0\rilevazioniPresenzaData.dll
+C:\Users\andre\Desktop\rilevazioniPresenze\rilevazioniPresenzaData\bin\Debug\net8.0\rilevazioniPresenzaData.pdb
+C:\Users\andre\Desktop\rilevazioniPresenze\rilevazioniPresenzaData\obj\Debug\net8.0\rilevazioniPresenzaData.csproj.AssemblyReference.cache
+C:\Users\andre\Desktop\rilevazioniPresenze\rilevazioniPresenzaData\obj\Debug\net8.0\rilevazioniPresenzaData.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\andre\Desktop\rilevazioniPresenze\rilevazioniPresenzaData\obj\Debug\net8.0\rilevazioniPresenzaData.AssemblyInfoInputs.cache
+C:\Users\andre\Desktop\rilevazioniPresenze\rilevazioniPresenzaData\obj\Debug\net8.0\rilevazioniPresenzaData.AssemblyInfo.cs
+C:\Users\andre\Desktop\rilevazioniPresenze\rilevazioniPresenzaData\obj\Debug\net8.0\rilevazioniPresenzaData.csproj.CoreCompileInputs.cache
+C:\Users\andre\Desktop\rilevazioniPresenze\rilevazioniPresenzaData\obj\Debug\net8.0\rilevazioniPresenzaData.dll
+C:\Users\andre\Desktop\rilevazioniPresenze\rilevazioniPresenzaData\obj\Debug\net8.0\refint\rilevazioniPresenzaData.dll
+C:\Users\andre\Desktop\rilevazioniPresenze\rilevazioniPresenzaData\obj\Debug\net8.0\rilevazioniPresenzaData.pdb
+C:\Users\andre\Desktop\rilevazioniPresenze\rilevazioniPresenzaData\obj\Debug\net8.0\rilevazioniPresenzaData.genruntimeconfig.cache
+C:\Users\andre\Desktop\rilevazioniPresenze\rilevazioniPresenzaData\obj\Debug\net8.0\ref\rilevazioniPresenzaData.dll
