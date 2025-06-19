@@ -13,7 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddAuthentication( options =>
+builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -29,7 +29,7 @@ builder.Services.AddAuthentication( options =>
         options.LogoutPath = null; // Percorso di reindirizzamento per il logout
         options.AccessDeniedPath = null; // Percorso per accesso negato
         options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Assicura che il cookie sia inviato solo su HTTPS
-        options.Cookie.SameSite = SameSiteMode.Lax; // O Strict, None a seconda delle tue esigenze
+        options.Cookie.SameSite = SameSiteMode.None; // O Strict, None a seconda delle tue esigenze
         options.Events = new CookieAuthenticationEvents
         {
             OnRedirectToLogin = context =>
@@ -56,12 +56,25 @@ builder.Services.AddAuthentication( options =>
         };
     });
 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("questaèunachiavesegretapiùsicura123"))
+        };
+    });
+
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("allowall", policy =>
     {
-        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+        policy.WithOrigins("http://127.0.0.1:5500").AllowAnyMethod().AllowAnyHeader().AllowCredentials();
     });
 });
 

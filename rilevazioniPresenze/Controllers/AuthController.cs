@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using rilevazioniPresenza.Reps.UserFiles;
 using rilevazioniPresenzaData.Models;
+using rilevazioniPresenze.DTOs;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -33,7 +34,7 @@ namespace rilevazioniPresenze.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(string username, string password)
+        public async Task<IActionResult> Login(LoginDTOs LoginDTOs)
         {
             //if (user.Username == "admin" && user.Password == "password")
             //{
@@ -41,9 +42,9 @@ namespace rilevazioniPresenze.Controllers
             //    return Ok(new { token });
             //}
             //return Unauthorized();
-            byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
+            byte[] passwordBytes = Encoding.UTF8.GetBytes(LoginDTOs.Password);
             byte[] passwordHashed = MD5.HashData(passwordBytes);
-            var user = _repo.GetUserByUsername(username);
+            var user = _repo.GetUserByUsername(LoginDTOs.Username);
             if (user == null)
                 return Unauthorized();
             if (Convert.ToHexString(passwordHashed).ToLower() != user.Password)
