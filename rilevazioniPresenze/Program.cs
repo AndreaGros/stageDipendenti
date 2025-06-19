@@ -1,4 +1,8 @@
-using rilevazioniPresenzaData.Reps.UserFiles;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using rilevazioniPresenza.Reps.UserFiles;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +12,49 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddAuthentication( options =>
+{
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+})
+    .AddCookie(options =>
+    {
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+        options.Cookie.Name = "YourAuthCookie"; // Nome del cookie
+        options.Cookie.HttpOnly = true; // Rende il cookie accessibile solo via HTTP (sicurezza)
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30); // Durata del cookie
+        options.SlidingExpiration = true; // Estende la durata ad ogni richiesta valida
+        options.LoginPath = null; // Percorso di reindirizzamento per utenti non autenticati
+        options.LogoutPath = null; // Percorso di reindirizzamento per il logout
+        options.AccessDeniedPath = null; // Percorso per accesso negato
+        options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Assicura che il cookie sia inviato solo su HTTPS
+        options.Cookie.SameSite = SameSiteMode.Lax; // O Strict, None a seconda delle tue esigenze
+        options.Events = new CookieAuthenticationEvents
+        {
+            OnRedirectToLogin = context =>
+            {
+                context.Response.StatusCode = 401;
+                Console.WriteLine($"DEBUG: RedirectToLogin event triggered. Path: {context.RedirectUri}");
+                // Non chiamare context.Response.Redirect() qui
+                // Puoi provare a chiamare context.HttpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                // e context.HandleResponse(); per sopprimere il reindirizzamento predefinito
+                return Task.CompletedTask;
+            },
+            OnRedirectToAccessDenied = context =>
+            {
+                Console.WriteLine($"DEBUG: RedirectToAccessDenied event triggered. Path: {context.RedirectUri}");
+                // context.HttpContext.Response.StatusCode = StatusCodes.Status403Forbidden;
+                // context.HandleResponse();
+                return Task.CompletedTask;
+            },
+            OnRedirectToLogout = context =>
+            {
+                Console.WriteLine($"DEBUG: RedirectToLogout event triggered. Path: {context.RedirectUri}");
+                return Task.CompletedTask;
+            }
+        };
+    });
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddCors(options =>
@@ -30,6 +77,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors("allowall");
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -25,8 +25,8 @@ namespace rilevazioniPresenzaData.Models
         public  string? Stato_Lavorativo { get; set; }
         public string? Codice_Fiscale { get; set; }
         public  string? Numero_Telefono { get; set; }
-        public  string? Mail { get; set; }
-        public  string? Username { get; set; }
-        public  string? Password { get; set; }
+        public required string Mail { get; set; }
+        public required string Username { get; set; }
+        public required string Password { get; set; }
     }
 }

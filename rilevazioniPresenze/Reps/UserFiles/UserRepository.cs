@@ -1,6 +1,8 @@
-﻿using rilevazioniPresenzaData.Models;
+﻿using rilevazioniPresenzaData;
+using rilevazioniPresenzaData.Models;
+using rilevazioniPresenze.DTOs;
 
-namespace rilevazioniPresenzaData.Reps.UserFiles
+namespace rilevazioniPresenza.Reps.UserFiles
 {
     public class UserRepository : IUserRepository, IDisposable
     {
@@ -12,13 +14,14 @@ namespace rilevazioniPresenzaData.Reps.UserFiles
 
         public User? GetAllDetailsByKey(string key)
         {
-            var userDetails = context.Users.FirstOrDefault(u => u.Matricola == key);
+            //var userDetails = context.Users.FirstOrDefault(u => u.Matricola == key);
+            var userDetails = context.Users.Find(key);
             return userDetails;
         }
 
         public List<User> GetEmps()
         {
-            var usersList= context.Users.ToList();
+            var usersList = context.Users.ToList();
             //var usersList = context.Users.GetType().GetProperty(status).GetValue(filter);
             return usersList;
         }
@@ -27,7 +30,7 @@ namespace rilevazioniPresenzaData.Reps.UserFiles
         {
             var added = context.Users.Add(employer);
             int result = context.SaveChanges();
-            if(result > 0)
+            if (result > 0)
                 return true;
             return false;
         }
@@ -45,9 +48,9 @@ namespace rilevazioniPresenzaData.Reps.UserFiles
             return false;
         }
 
-        public bool UpdateEmp(User employer)
+        public bool UpdateEmp(DetailUserDTOs employer)
         {
-            var dbEmp=context.Users.FirstOrDefault(u => u.Matricola == employer.Matricola);
+            var dbEmp = context.Users.FirstOrDefault(u => u.Matricola == employer.Matricola);
             if (dbEmp != null)
             {
                 context.Entry(dbEmp).CurrentValues.SetValues(employer);
@@ -57,5 +60,10 @@ namespace rilevazioniPresenzaData.Reps.UserFiles
             return false;
         }
 
+        public User? GetUserByUsername(string username)
+        {
+            var user = context.Users.FirstOrDefault(u => u.Username == username);
+            return user;
+        }
     }
 }

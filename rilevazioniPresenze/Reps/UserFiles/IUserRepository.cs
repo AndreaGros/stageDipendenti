@@ -1,6 +1,7 @@
 ﻿using rilevazioniPresenzaData.Models;
+using rilevazioniPresenze.DTOs;
 
-namespace rilevazioniPresenzaData.Reps.UserFiles
+namespace rilevazioniPresenza.Reps.UserFiles
 {
     public interface IUserRepository
     {
@@ -8,6 +9,7 @@ namespace rilevazioniPresenzaData.Reps.UserFiles
         List<User> GetEmps();
         bool AddEmp(User employer);
         bool RemoveEmp(string key);
-        bool UpdateEmp(User employer);
+        bool UpdateEmp(DetailUserDTOs employer);
+        User? GetUserByUsername(string username);
     }
 }
