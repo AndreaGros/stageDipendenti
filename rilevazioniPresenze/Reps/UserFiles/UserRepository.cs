@@ -1,4 +1,6 @@
-﻿using rilevazioniPresenzaData;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using rilevazioniPresenzaData;
 using rilevazioniPresenzaData.Models;
 using rilevazioniPresenze.DTOs;
 
@@ -19,14 +21,25 @@ namespace rilevazioniPresenza.Reps.UserFiles
             return userDetails;
         }
 
-        public List<User> GetEmps(string isAdmin)
+        public List<User>? GetEmps(string isAdmin, FilterDTOs filters)
         {
+            var query = context.Users.AsQueryable();
             List<User> usersList;
-            if(isAdmin == "admin")
-                usersList = context.Users.ToList();
+
+            if(filters.Stato_Lavorativo != null)
+                query = query.Where(u => u.Stato_Lavorativo == filters.Stato_Lavorativo);
+
+            if (filters.Provincia_Residenza != null)
+                query = query.Where(u => u.Provincia_Residenza == filters.Provincia_Residenza);
+
+            if (filters.Citta_Nascita != null)
+                query = query.Where(u => u.Citta_Nascita == filters.Citta_Nascita);
+
+            if (isAdmin == "admin")
+                usersList = query.ToList();
             else
-                usersList = context.Users.Where(u => !u.Admin).ToList();
-            //var usersList = context.Users.GetType().GetProperty(status).GetValue(filter);
+                usersList = query.Where(u => !u.Admin).ToList();
+
             return usersList;
         }
 

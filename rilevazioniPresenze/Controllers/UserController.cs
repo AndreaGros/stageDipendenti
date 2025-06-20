@@ -55,12 +55,19 @@ namespace rilevazioniPresenze.Controllers
 
         [HttpGet]
         [Authorize]
-        public IActionResult GetGeneralDetails()
+        public IActionResult GetGeneralDetails(string? Stato_Lavorativo, string? Citta_Nascita, string? Provincia_Residenza)
         {
             List<GeneralUserDTOs> usersDTOs = new();
             var role = User.FindFirst(ClaimTypes.Role);
 
-            List<User> users = _repo.GetEmps(role.Value);
+            FilterDTOs filters = new FilterDTOs
+            {
+                Stato_Lavorativo = Stato_Lavorativo,
+                Citta_Nascita = Citta_Nascita,
+                Provincia_Residenza = Provincia_Residenza
+            };
+
+            List<User> users = _repo.GetEmps(role.Value, filters);
 
             foreach (var user in users)
             {
@@ -140,6 +147,8 @@ namespace rilevazioniPresenze.Controllers
             string username = usernameClaim.Value;
             User? user = _repo.GetUserByUsername(username);
 
+            if(user == null)
+                return NotFound();
             DetailUserDTOs detailsUser = new DetailUserDTOs
             {
                 Matricola = user.Matricola,

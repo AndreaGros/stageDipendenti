@@ -49,12 +49,12 @@ namespace rilevazioniPresenze.Controllers
                 return Unauthorized();
             if (Convert.ToHexString(passwordHashed).ToLower() != user.Password)
                 return Unauthorized();
-            var token = await GenerateJwtToken(user.Username, user.Admin);
+            var token = GenerateJwtToken(user.Username, user.Admin);
 
             return Ok(new { token });
         }
 
-        private async Task<string> GenerateJwtToken(string username, bool isAdmin)
+        private string GenerateJwtToken(string username, bool isAdmin)
         {
             var claims = new[]
             {

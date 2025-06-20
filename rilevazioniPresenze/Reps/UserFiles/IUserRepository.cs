@@ -1,12 +1,13 @@
 ﻿using rilevazioniPresenzaData.Models;
 using rilevazioniPresenze.DTOs;
 
+
 namespace rilevazioniPresenza.Reps.UserFiles
 {
     public interface IUserRepository
     {
         User? GetAllDetailsByKey(string key);
-        List<User> GetEmps(string role);
+        List<User>? GetEmps(string role, FilterDTOs filters);
         bool AddEmp(User employer);
         bool RemoveEmp(string key);
         bool UpdateEmp(DetailUserDTOs employer);
