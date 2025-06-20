@@ -6,7 +6,7 @@ namespace rilevazioniPresenza.Reps.UserFiles
     public interface IUserRepository
     {
         User? GetAllDetailsByKey(string key);
-        List<User> GetEmps();
+        List<User> GetEmps(string role);
         bool AddEmp(User employer);
         bool RemoveEmp(string key);
         bool UpdateEmp(DetailUserDTOs employer);

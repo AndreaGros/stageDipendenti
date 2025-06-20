@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using rilevazioniPresenzaData.Models;
 using rilevazioniPresenza.Reps.UserFiles;
+using rilevazioniPresenzaData.Models;
 using rilevazioniPresenze.DTOs;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using Microsoft.AspNetCore.Authorization;
 
 namespace rilevazioniPresenze.Controllers
 {
@@ -21,7 +22,7 @@ namespace rilevazioniPresenze.Controllers
         }
 
         [HttpGet("{key}")]
-        [Authorize(Roles ="admin")]
+        [Authorize]
         public IActionResult GetAllDetails([FromRoute] string key)
         {
             User? user = _repo.GetAllDetailsByKey(key);
@@ -57,7 +58,9 @@ namespace rilevazioniPresenze.Controllers
         public IActionResult GetGeneralDetails()
         {
             List<GeneralUserDTOs> usersDTOs = new();
-            List<User> users = _repo.GetEmps();
+            var role = User.FindFirst(ClaimTypes.Role);
+
+            List<User> users = _repo.GetEmps(role.Value);
 
             foreach (var user in users)
             {
@@ -114,7 +117,7 @@ namespace rilevazioniPresenze.Controllers
         }
 
         [HttpDelete("{key}")]
-        [Authorize]
+        [Authorize(Roles = "admin")]
         public bool RemoveEmployer(string key)
         {
             bool remove = _repo.RemoveEmp(key);
@@ -122,11 +125,42 @@ namespace rilevazioniPresenze.Controllers
         }
 
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles = "admin")]
         public bool UpdateEmployer(DetailUserDTOs employer)
         {
             bool update = _repo.UpdateEmp(employer);
             return update;
+        }
+
+        [HttpGet("username")]
+        [Authorize]
+        public IActionResult GetEmployer()
+        {
+            var usernameClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            string username = usernameClaim.Value;
+            User? user = _repo.GetUserByUsername(username);
+
+            DetailUserDTOs detailsUser = new DetailUserDTOs
+            {
+                Matricola = user.Matricola,
+                Badge = user.Badge,
+                Nominativo = user.Nominativo,
+                Sesso = user.Sesso,
+                Stato_Civile = user.Stato_Civile,
+                Data_Nascita = user.Data_Nascita,
+                Citta_Nascita = user.Citta_Nascita,
+                Provincia_Nascita = user.Provincia_Nascita,
+                Stato_Nascita = user.Stato_Nascita,
+                Indirizzo_Residenza = user.Indirizzo_Residenza,
+                Provincia_Residenza = user.Provincia_Residenza,
+                Stato_Residenza = user.Stato_Residenza,
+                Codice_Fiscale = user.Codice_Fiscale,
+                Numero_Telefono = user.Numero_Telefono,
+                Stato_Lavorativo = user.Stato_Lavorativo,
+                Mail = user.Mail,
+                Username = user.Username
+            };
+            return Ok(detailsUser);
         }
     }
 }

@@ -19,9 +19,13 @@ namespace rilevazioniPresenza.Reps.UserFiles
             return userDetails;
         }
 
-        public List<User> GetEmps()
+        public List<User> GetEmps(string isAdmin)
         {
-            var usersList = context.Users.ToList();
+            List<User> usersList;
+            if(isAdmin == "admin")
+                usersList = context.Users.ToList();
+            else
+                usersList = context.Users.Where(u => !u.Admin).ToList();
             //var usersList = context.Users.GetType().GetProperty(status).GetValue(filter);
             return usersList;
         }
@@ -63,6 +67,8 @@ namespace rilevazioniPresenza.Reps.UserFiles
         public User? GetUserByUsername(string username)
         {
             var user = context.Users.FirstOrDefault(u => u.Username == username);
+            if (user == null)
+                return null;
             return user;
         }
     }
