@@ -6,6 +6,7 @@ using rilevazioniPresenza.Reps.UserFiles;
 using rilevazioniPresenze.DTOs;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 namespace rilevazioniPresenze.Controllers
 {
@@ -20,6 +21,7 @@ namespace rilevazioniPresenze.Controllers
         }
 
         [HttpGet("{key}")]
+        [Authorize(Roles ="admin")]
         public IActionResult GetAllDetails([FromRoute] string key)
         {
             User? user = _repo.GetAllDetailsByKey(key);
@@ -45,12 +47,13 @@ namespace rilevazioniPresenze.Controllers
                 Numero_Telefono = user.Numero_Telefono,
                 Stato_Lavorativo = user.Stato_Lavorativo,
                 Mail = user.Mail,
-                Username=user.Username
+                Username = user.Username
             };
             return Ok(detailsUser);
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult GetGeneralDetails()
         {
             List<GeneralUserDTOs> usersDTOs = new();
@@ -79,6 +82,7 @@ namespace rilevazioniPresenze.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public bool AddEmployer(DetailUserDTOs employerDTOs)
         {
             MD5 mD5 = MD5.Create();
@@ -110,6 +114,7 @@ namespace rilevazioniPresenze.Controllers
         }
 
         [HttpDelete("{key}")]
+        [Authorize]
         public bool RemoveEmployer(string key)
         {
             bool remove = _repo.RemoveEmp(key);
@@ -117,6 +122,7 @@ namespace rilevazioniPresenze.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public bool UpdateEmployer(DetailUserDTOs employer)
         {
             bool update = _repo.UpdateEmp(employer);

@@ -82,6 +82,9 @@ namespace rilevazioniPresenzaData.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Admin")
+                        .HasColumnType("bit");
+
                     b.HasKey("Matricola");
 
                     b.ToTable("Users");

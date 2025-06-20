@@ -49,16 +49,17 @@ namespace rilevazioniPresenze.Controllers
                 return Unauthorized();
             if (Convert.ToHexString(passwordHashed).ToLower() != user.Password)
                 return Unauthorized();
-            var token = await GenerateJwtToken(user.Username);
+            var token = await GenerateJwtToken(user.Username, user.Admin);
 
             return Ok(new { token });
         }
 
-        private async Task<string> GenerateJwtToken(string username)
+        private async Task<string> GenerateJwtToken(string username, bool isAdmin)
         {
             var claims = new[]
             {
-            new Claim(JwtRegisteredClaimNames.Sub, username),
+            new Claim(ClaimTypes.NameIdentifier, username),
+            new Claim(ClaimTypes.Role, isAdmin?"admin":"normal"),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
@@ -80,10 +81,10 @@ namespace rilevazioniPresenze.Controllers
             };
 
             // 5. SignIn con l'identità e memorizzazione nel cookie
-            await HttpContext.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(claimsIdentity),
-                authProperties);
+            //await HttpContext.SignInAsync(
+            //    CookieAuthenticationDefaults.AuthenticationScheme,
+            //    new ClaimsPrincipal(claimsIdentity),
+            //    authProperties);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
