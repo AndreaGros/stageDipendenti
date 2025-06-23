@@ -110,8 +110,9 @@ var connectionString =
         ?? throw new InvalidOperationException("Connection string"
         + "'DefaultConnection' not found.");
 
-builder.Services.AddDbContext<RilevazionePresenzaContext>(options =>
-    options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<RilevazionePresenzaContext>(
+    options =>options.UseSqlServer(
+        connectionString, o => o.MigrationsAssembly("rilevazioniPresenzaData")));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddCors(options =>

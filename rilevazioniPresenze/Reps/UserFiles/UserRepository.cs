@@ -8,18 +8,18 @@ namespace rilevazioniPresenza.Reps.UserFiles
 {
     public class UserRepository : IUserRepository
     {
-        RilevazionePresenzaContext context;
+        RilevazionePresenzaContext _context;
 
-        public UserRepository(RilevazionePresenzaContext _context)
+        public UserRepository(RilevazionePresenzaContext context)
         {
-            context = _context;
+            _context = context;
         }
 
         public User? GetAllDetailsByKey(string key)
         {
             //var userDetails = context.Users.FirstOrDefault(u => u.Matricola == key);
             //var userDetails = context.Users.Include( u => u.UserShifts.Where(us => us.Giorno == 0) ).FirstOrDefault(u => u.Matricola == key);
-            var userDetails = context.Users.Include(u => u.UserShifts).FirstOrDefault(u => u.Matricola == key);
+            var userDetails = _context.Users.Include(u => u.UserShifts).FirstOrDefault(u => u.Matricola == key);
             //var userDetails2 = context.Users.ToList();
             //userDetails2=userDetails2.Where(u => u.Matricola == key).ToList();
             return userDetails;
@@ -27,7 +27,7 @@ namespace rilevazioniPresenza.Reps.UserFiles
 
         public List<User> GetEmps(string isAdmin, FilterDTOs filters)
         {
-            var query = context.Users.AsQueryable();
+            var query = _context.Users.AsQueryable();
             List<User> usersList;
 
             if(filters.Stato_Lavorativo != null)
@@ -82,18 +82,18 @@ namespace rilevazioniPresenza.Reps.UserFiles
 
         public bool AddEmp(User user)
         {
-            context.Users.Add(user);
-            return context.SaveChanges() > 0;
+            _context.Users.Add(user);
+            return _context.SaveChanges() > 0;
         }
 
         public bool RemoveEmp(string key)
         {
-            var employer = context.Users.FirstOrDefault(u => u.Matricola == key);
+            var employer = _context.Users.FirstOrDefault(u => u.Matricola == key);
 
             if (employer != null)
             {
-                context.Users.Remove(employer);
-                context.SaveChanges();
+                _context.Users.Remove(employer);
+                _context.SaveChanges();
                 return true;
             }
             return false;
@@ -101,17 +101,17 @@ namespace rilevazioniPresenza.Reps.UserFiles
 
         public bool UpdateEmp(DetailUserDTOs employer)
         {
-            var dbEmp = context.Users.FirstOrDefault(u => u.Matricola == employer.Matricola);
+            var dbEmp = _context.Users.FirstOrDefault(u => u.Matricola == employer.Matricola);
             if (dbEmp != null)
             {
-                context.Entry(dbEmp).CurrentValues.SetValues(employer);
+                _context.Entry(dbEmp).CurrentValues.SetValues(employer);
                 foreach (var userShift in employer.UserShifts)
                 {
-                    var shift = context.UserShifts.FirstOrDefault(us => us.IdMatricola == employer.Matricola);
+                    var shift = _context.UserShifts.FirstOrDefault(us => us.IdMatricola == employer.Matricola);
                     if (shift != null)
-                        context.Entry(shift).CurrentValues.SetValues(userShift);
+                        _context.Entry(shift).CurrentValues.SetValues(userShift);
                 }
-                context.SaveChanges();
+                _context.SaveChanges();
                 return true;
             }
             return false;
@@ -119,7 +119,7 @@ namespace rilevazioniPresenza.Reps.UserFiles
 
         public User? GetUserByUsername(string username)
         {
-            var user = context.Users.FirstOrDefault(u => u.Username == username);
+            var user = _context.Users.FirstOrDefault(u => u.Username == username);
             if (user == null)
                 return null;
             return user;
