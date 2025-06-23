@@ -1,4 +1,6 @@
-﻿namespace rilevazioniPresenze.DTOs
+﻿using rilevazioniPresenzaData.Models;
+
+namespace rilevazioniPresenze.DTOs
 {
     public class DetailUserDTOs
     {
@@ -19,5 +21,6 @@
         public string? Numero_Telefono { get; set; }
         public required string Mail { get; set; }
         public required string Username { get; set; }
+        public ICollection<UserShiftDTOs> UserShifts { get; set; } = [];
     }
 }

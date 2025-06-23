@@ -17,11 +17,14 @@ namespace rilevazioniPresenza.Reps.UserFiles
         public User? GetAllDetailsByKey(string key)
         {
             //var userDetails = context.Users.FirstOrDefault(u => u.Matricola == key);
-            var userDetails = context.Users.Find(key);
+            //var userDetails = context.Users.Include( u => u.UserShifts.Where(us => us.Giorno == 0) ).FirstOrDefault(u => u.Matricola == key);
+            var userDetails = context.Users.Include(u => u.UserShifts).FirstOrDefault(u => u.Matricola == key);
+            //var userDetails2 = context.Users.ToList();
+            //userDetails2=userDetails2.Where(u => u.Matricola == key).ToList();
             return userDetails;
         }
 
-        public List<User>? GetEmps(string isAdmin, FilterDTOs filters)
+        public List<User> GetEmps(string isAdmin, FilterDTOs filters)
         {
             var query = context.Users.AsQueryable();
             List<User> usersList;
@@ -45,7 +48,7 @@ namespace rilevazioniPresenza.Reps.UserFiles
 
         public bool AddEmp(User employer)
         {
-            var added = context.Users.Add(employer);
+            
             int result = context.SaveChanges();
             if (result > 0)
                 return true;

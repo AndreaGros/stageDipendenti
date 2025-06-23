@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using rilevazioniPresenza.Reps.UserFiles;
@@ -111,6 +112,9 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
+//builder.Logging.AddFile("logs/myapp-{Date}.txt", LogLevel.Information);
 
 var app = builder.Build();
 

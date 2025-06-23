@@ -30,6 +30,21 @@ namespace rilevazioniPresenze.Controllers
             if (user == null)
                 return NotFound();
 
+            ICollection<UserShiftDTOs> userShiftDTOs = [];
+
+            foreach (var userShift in user.UserShifts)
+            {
+                userShiftDTOs.Add(new UserShiftDTOs
+                {
+                    IdMatricola = userShift.IdMatricola,
+                    Giorno = userShift.Giorno,
+                    T1 = userShift.T1,
+                    FT1 = userShift.FT1,
+                    T2 = userShift.T2,
+                    FT2 = userShift.FT2
+                });
+            }
+
             DetailUserDTOs detailsUser = new DetailUserDTOs
             {
                 Matricola = user.Matricola,
@@ -48,7 +63,8 @@ namespace rilevazioniPresenze.Controllers
                 Numero_Telefono = user.Numero_Telefono,
                 Stato_Lavorativo = user.Stato_Lavorativo,
                 Mail = user.Mail,
-                Username = user.Username
+                Username = user.Username,
+                UserShifts = userShiftDTOs
             };
             return Ok(detailsUser);
         }
@@ -58,7 +74,7 @@ namespace rilevazioniPresenze.Controllers
         public IActionResult GetGeneralDetails(string? Stato_Lavorativo, string? Citta_Nascita, string? Provincia_Residenza)
         {
             List<GeneralUserDTOs> usersDTOs = new();
-            var role = User.FindFirst(ClaimTypes.Role);
+            var role = User.FindFirst(ClaimTypes.Role)!;
 
             FilterDTOs filters = new FilterDTOs
             {
@@ -98,6 +114,8 @@ namespace rilevazioniPresenze.Controllers
             MD5 mD5 = MD5.Create();
             byte[] defaultBytes = Encoding.UTF8.GetBytes("password");
             byte[] hashBytes = MD5.HashData(defaultBytes);
+
+
             User employer = new User
             {
                 Matricola = employerDTOs.Matricola,
@@ -119,6 +137,10 @@ namespace rilevazioniPresenze.Controllers
                 Username = employerDTOs.Username,
                 Password = Convert.ToHexString(hashBytes).ToLower()
             };
+
+            
+
+
             bool add = _repo.AddEmp(employer);
             return add;
         }
@@ -143,11 +165,11 @@ namespace rilevazioniPresenze.Controllers
         [Authorize]
         public IActionResult GetEmployer()
         {
-            var usernameClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            var usernameClaim = User.FindFirst(ClaimTypes.NameIdentifier)!;
             string username = usernameClaim.Value;
             User? user = _repo.GetUserByUsername(username);
 
-            if(user == null)
+            if (user == null)
                 return NotFound();
             DetailUserDTOs detailsUser = new DetailUserDTOs
             {
