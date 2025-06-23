@@ -6,12 +6,13 @@ using rilevazioniPresenze.DTOs;
 
 namespace rilevazioniPresenza.Reps.UserFiles
 {
-    public class UserRepository : IUserRepository, IDisposable
+    public class UserRepository : IUserRepository
     {
-        RilevazionePresenzaContext context = new RilevazionePresenzaContext();
-        public void Dispose()
+        RilevazionePresenzaContext context;
+
+        public UserRepository(RilevazionePresenzaContext _context)
         {
-            context.Dispose();
+            context = _context;
         }
 
         public User? GetAllDetailsByKey(string key)
