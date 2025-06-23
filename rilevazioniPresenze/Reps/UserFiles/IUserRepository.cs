@@ -8,7 +8,8 @@ namespace rilevazioniPresenza.Reps.UserFiles
     {
         User? GetAllDetailsByKey(string key);
         List<User> GetEmps(string role, FilterDTOs filters);
-        bool AddEmp(User employer);
+        //bool AddEmp(User employer, List<UserShiftDTOs> userShifts);
+        bool AddEmp(User user);
         bool RemoveEmp(string key);
         bool UpdateEmp(DetailUserDTOs employer);
         User? GetUserByUsername(string username);

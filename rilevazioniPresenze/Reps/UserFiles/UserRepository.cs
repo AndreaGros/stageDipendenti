@@ -46,13 +46,43 @@ namespace rilevazioniPresenza.Reps.UserFiles
             return usersList;
         }
 
-        public bool AddEmp(User employer)
+        //public bool AddEmp(User employer,List<UserShiftDTOs> userShiftsDTOs)
+        //{
+        //    //using var transaction = context.Database.BeginTransaction();
+
+        //    //var added = context.Users.Add(employer);
+
+        //    //_ = context.SaveChanges();
+
+        //    //List<UserShift> userShifts = new List<UserShift>();
+        //    //foreach (var userShiftDTOs in userShiftsDTOs)
+        //    //{
+        //    //    userShifts.Add(new UserShift
+        //    //    {
+        //    //        IdMatricola = employer.Matricola,
+        //    //        Giorno = userShiftDTOs.Giorno,
+        //    //        T1 = userShiftDTOs.T1,
+        //    //        FT1 = userShiftDTOs.FT1,
+        //    //        T2 = userShiftDTOs.T2,
+        //    //        FT2 = userShiftDTOs.FT2,
+        //    //    });
+        //    //}
+
+        //    //context.UserShifts.AddRange(userShifts);
+
+        //    //int result = context.SaveChanges();
+        //    //if (result > 0)
+        //    //{ 
+        //    //    transaction.Commit();
+        //    //    return true;
+        //    //}
+        //    //return false;
+        //}
+
+        public bool AddEmp(User user)
         {
-            
-            int result = context.SaveChanges();
-            if (result > 0)
-                return true;
-            return false;
+            context.Users.Add(user);
+            return context.SaveChanges() > 0;
         }
 
         public bool RemoveEmp(string key)
@@ -74,6 +104,12 @@ namespace rilevazioniPresenza.Reps.UserFiles
             if (dbEmp != null)
             {
                 context.Entry(dbEmp).CurrentValues.SetValues(employer);
+                foreach (var userShift in employer.UserShifts)
+                {
+                    var shift = context.UserShifts.FirstOrDefault(us => us.IdMatricola == employer.Matricola);
+                    if (shift != null)
+                        context.Entry(shift).CurrentValues.SetValues(userShift);
+                }
                 context.SaveChanges();
                 return true;
             }

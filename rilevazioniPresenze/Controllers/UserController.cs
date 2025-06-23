@@ -36,7 +36,6 @@ namespace rilevazioniPresenze.Controllers
             {
                 userShiftDTOs.Add(new UserShiftDTOs
                 {
-                    IdMatricola = userShift.IdMatricola,
                     Giorno = userShift.Giorno,
                     T1 = userShift.T1,
                     FT1 = userShift.FT1,
@@ -111,6 +110,35 @@ namespace rilevazioniPresenze.Controllers
         [Authorize]
         public bool AddEmployer(DetailUserDTOs employerDTOs)
         {
+            //MD5 mD5 = MD5.Create();
+            //byte[] defaultBytes = Encoding.UTF8.GetBytes("password");
+            //byte[] hashBytes = MD5.HashData(defaultBytes);
+
+
+            //User employer = new User
+            //{
+            //    Matricola = employerDTOs.Matricola,
+            //    Badge = employerDTOs.Badge,
+            //    Nominativo = employerDTOs.Nominativo,
+            //    Sesso = employerDTOs.Sesso,
+            //    Stato_Civile = employerDTOs.Stato_Civile,
+            //    Data_Nascita = employerDTOs.Data_Nascita,
+            //    Citta_Nascita = employerDTOs.Citta_Nascita,
+            //    Provincia_Nascita = employerDTOs.Provincia_Nascita,
+            //    Stato_Nascita = employerDTOs.Stato_Nascita,
+            //    Indirizzo_Residenza = employerDTOs.Indirizzo_Residenza,
+            //    Provincia_Residenza = employerDTOs.Provincia_Residenza,
+            //    Stato_Residenza = employerDTOs.Stato_Residenza,
+            //    Stato_Lavorativo = employerDTOs.Stato_Lavorativo,
+            //    Codice_Fiscale = employerDTOs.Codice_Fiscale,
+            //    Numero_Telefono = employerDTOs.Numero_Telefono,
+            //    Mail = employerDTOs.Mail,
+            //    Username = employerDTOs.Username,
+            //    Password = Convert.ToHexString(hashBytes).ToLower()
+            //};
+
+            //bool add = _repo.AddEmp(employer, employerDTOs.UserShifts.ToList());
+
             MD5 mD5 = MD5.Create();
             byte[] defaultBytes = Encoding.UTF8.GetBytes("password");
             byte[] hashBytes = MD5.HashData(defaultBytes);
@@ -135,11 +163,18 @@ namespace rilevazioniPresenze.Controllers
                 Numero_Telefono = employerDTOs.Numero_Telefono,
                 Mail = employerDTOs.Mail,
                 Username = employerDTOs.Username,
-                Password = Convert.ToHexString(hashBytes).ToLower()
+                Password = Convert.ToHexString(hashBytes).ToLower(),
+                Admin=employerDTOs.Admin,
+                UserShifts = employerDTOs.UserShifts.Select(u => new UserShift
+                {
+                    IdMatricola = employerDTOs.Matricola,
+                    Giorno = u.Giorno,
+                    T1 = u.T1,
+                    FT1 = u.FT1,
+                    T2 = u.T2,
+                    FT2 = u.FT2
+                }).ToList()
             };
-
-            
-
 
             bool add = _repo.AddEmp(employer);
             return add;
@@ -171,6 +206,7 @@ namespace rilevazioniPresenze.Controllers
 
             if (user == null)
                 return NotFound();
+
             DetailUserDTOs detailsUser = new DetailUserDTOs
             {
                 Matricola = user.Matricola,
@@ -189,7 +225,7 @@ namespace rilevazioniPresenze.Controllers
                 Numero_Telefono = user.Numero_Telefono,
                 Stato_Lavorativo = user.Stato_Lavorativo,
                 Mail = user.Mail,
-                Username = user.Username
+                Username = user.Username,
             };
             return Ok(detailsUser);
         }

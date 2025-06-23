@@ -21,6 +21,7 @@ namespace rilevazioniPresenze.DTOs
         public string? Numero_Telefono { get; set; }
         public required string Mail { get; set; }
         public required string Username { get; set; }
+        public bool Admin { get; set; }
         public ICollection<UserShiftDTOs> UserShifts { get; set; } = [];
     }
 }

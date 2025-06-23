@@ -6,6 +6,11 @@ namespace rilevazioniPresenzaData
 {
     public class RilevazionePresenzaContext : DbContext
     {
+        //public RilevazionePresenzaContext(DbContextOptions<RilevazionePresenzaContext> options)
+        //: base(options)
+        //{
+        //}
+
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<UserShift> UserShifts { get; set; } = null!;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
