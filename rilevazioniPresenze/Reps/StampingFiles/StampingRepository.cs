@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using rilevazioniPresenzaData;
 using rilevazioniPresenzaData.Models;
 
+
 namespace rilevazioniPresenze.Reps.StampingFiles
 {
     public class StampingRepository : IStampingRepository
@@ -24,9 +25,9 @@ namespace rilevazioniPresenze.Reps.StampingFiles
             return _context.SaveChanges() > 0;
         }
 
-        public bool RemoveStamp(ShiftType shiftType, DateTime orario)
+        public bool RemoveStamp(string idMatricola, ShiftType shiftType, DateTime orario)
         {
-            var stamp = _context.Stampings.FirstOrDefault(s => s.ShiftType == shiftType && s.Orario == orario);
+            var stamp = _context.Stampings.FirstOrDefault(s => s.IdMatricola == idMatricola && s.ShiftType == shiftType && s.Orario == orario);
 
             if (stamp != null)
             {
@@ -37,14 +38,9 @@ namespace rilevazioniPresenze.Reps.StampingFiles
             return false;
         }
 
-        public Stamping? GetStampByKey(ShiftType shiftType, DateTime orario)
+        public Stamping? GetStampByKey(string idMatricola, ShiftType shiftType, DateTime orario)
         {
-            return _context.Stampings.FirstOrDefault(s => s.ShiftType == shiftType && s.Orario == orario);
-        }
-
-        public bool UpdateStamp(ShiftType shiftType, DateTime orario)
-        {
-            throw new NotImplementedException();
+            return _context.Stampings.FirstOrDefault(s => s.IdMatricola == idMatricola && s.ShiftType == shiftType && s.Orario == orario);
         }
     }
 }

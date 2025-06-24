@@ -31,10 +31,9 @@ namespace rilevazioniPresenzaData.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("IdMatricola")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("ShiftType", "Orario");
+                    b.HasKey("ShiftType", "Orario", "IdMatricola");
 
                     b.HasIndex("IdMatricola");
 

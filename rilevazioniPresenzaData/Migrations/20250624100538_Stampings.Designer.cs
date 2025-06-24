@@ -12,7 +12,7 @@ using rilevazioniPresenzaData;
 namespace rilevazioniPresenzaData.Migrations
 {
     [DbContext(typeof(RilevazionePresenzaContext))]
-    [Migration("20250623153610_Stampings")]
+    [Migration("20250624100538_Stampings")]
     partial class Stampings
     {
         /// <inheritdoc />
@@ -34,10 +34,9 @@ namespace rilevazioniPresenzaData.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("IdMatricola")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("ShiftType", "Orario");
+                    b.HasKey("ShiftType", "Orario", "IdMatricola");
 
                     b.HasIndex("IdMatricola");
 

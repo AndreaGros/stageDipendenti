@@ -46,17 +46,17 @@ namespace rilevazioniPresenze.Controllers
             return _repo.AddStamp(stamp);
         }
 
-        [HttpDelete("{shiftType}/{orario}")]
-        public bool deleteStamping(ShiftType shiftType, DateTime orario)
+        [HttpDelete("{idMatricola}/{shiftType}/{orario}")]
+        public bool deleteStamping(string idMatricola, ShiftType shiftType, DateTime orario)
         {
-            return _repo.RemoveStamp(shiftType, orario);
+            return _repo.RemoveStamp(idMatricola, shiftType, orario);
         }
 
-        [HttpGet("{shiftType}/{orario}")]
-        public IActionResult GetStampingByKey(ShiftType shiftType, DateTime orario)
+        [HttpGet("{idMatricola}/{shiftType}/{orario}")]
+        public IActionResult GetStampingByKey(string idMatricola, ShiftType shiftType, DateTime orario)
         {
             
-            Stamping? stamp = _repo.GetStampByKey(shiftType, orario);
+            Stamping? stamp = _repo.GetStampByKey(idMatricola, shiftType, orario);
             if (stamp == null)
                 return NotFound();
 

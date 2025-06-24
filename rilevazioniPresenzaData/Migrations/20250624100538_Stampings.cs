@@ -15,13 +15,13 @@ namespace rilevazioniPresenzaData.Migrations
                 name: "Stampings",
                 columns: table => new
                 {
+                    IdMatricola = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ShiftType = table.Column<int>(type: "int", nullable: false),
-                    Orario = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdMatricola = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    Orario = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Stampings", x => new { x.ShiftType, x.Orario });
+                    table.PrimaryKey("PK_Stampings", x => new { x.ShiftType, x.Orario, x.IdMatricola });
                     table.ForeignKey(
                         name: "FK_Stampings_Users_IdMatricola",
                         column: x => x.IdMatricola,

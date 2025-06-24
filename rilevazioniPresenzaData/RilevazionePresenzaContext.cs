@@ -32,7 +32,7 @@ namespace rilevazioniPresenzaData
                 .IsRequired();
             });
 
-            modelBuilder.Entity<Stamping>().HasKey(s => new { s.ShiftType, s.Orario });
+            modelBuilder.Entity<Stamping>().HasKey(s => new { s.ShiftType, s.Orario, s.IdMatricola });
 
 
             modelBuilder.Entity<User>(builder =>
