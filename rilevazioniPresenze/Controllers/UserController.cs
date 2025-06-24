@@ -22,7 +22,7 @@ namespace rilevazioniPresenze.Controllers
         }
 
         [HttpGet("{key}")]
-        [Authorize]
+        //[Authorize]
         public IActionResult GetAllDetails([FromRoute] string key)
         {
             User? user = _repo.GetAllDetailsByKey(key);

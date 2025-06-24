@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using rilevazioniPresenza.Reps.UserFiles;
 using rilevazioniPresenzaData;
+using rilevazioniPresenze.Reps.StampingFiles;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -115,6 +116,7 @@ builder.Services.AddDbContext<RilevazionePresenzaContext>(
         connectionString, o => o.MigrationsAssembly("rilevazioniPresenzaData")));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IStampingRepository, StampingRepository>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("allowall", policy =>
