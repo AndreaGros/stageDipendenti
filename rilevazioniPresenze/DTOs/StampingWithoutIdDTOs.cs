@@ -2,9 +2,8 @@
 
 namespace rilevazioniPresenze.DTOs
 {
-    public class StampingDTOs
+    public class StampingWithoutIdDTOs
     {
-        public int Id { get; set; }
         public required string IdMatricola { get; set; }
 
         public ShiftType ShiftType { get; set; }

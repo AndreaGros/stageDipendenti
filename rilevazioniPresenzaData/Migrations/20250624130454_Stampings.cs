@@ -15,13 +15,15 @@ namespace rilevazioniPresenzaData.Migrations
                 name: "Stampings",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     IdMatricola = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ShiftType = table.Column<int>(type: "int", nullable: false),
                     Orario = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Stampings", x => new { x.ShiftType, x.Orario, x.IdMatricola });
+                    table.PrimaryKey("PK_Stampings", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Stampings_Users_IdMatricola",
                         column: x => x.IdMatricola,

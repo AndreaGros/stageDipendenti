@@ -124,5 +124,10 @@ namespace rilevazioniPresenza.Reps.UserFiles
                 return null;
             return user;
         }
+
+        public List<string> GetIds()
+        {
+            return _context.Users.Select(u => u.Matricola).ToList();
+        }
     }
 }

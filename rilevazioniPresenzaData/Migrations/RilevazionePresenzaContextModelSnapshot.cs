@@ -24,16 +24,23 @@ namespace rilevazioniPresenzaData.Migrations
 
             modelBuilder.Entity("rilevazioniPresenzaData.Models.Stamping", b =>
                 {
-                    b.Property<int>("ShiftType")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("IdMatricola")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("Orario")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("IdMatricola")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ShiftType")
+                        .HasColumnType("int");
 
-                    b.HasKey("ShiftType", "Orario", "IdMatricola");
+                    b.HasKey("Id");
 
                     b.HasIndex("IdMatricola");
 

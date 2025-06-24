@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using rilevazioniPresenzaData;
 using rilevazioniPresenzaData.Models;
+using rilevazioniPresenze.DTOs;
 
 
 namespace rilevazioniPresenze.Reps.StampingFiles
@@ -14,9 +15,12 @@ namespace rilevazioniPresenze.Reps.StampingFiles
         {
             _context = context;
         }
-        public List<Stamping> GetStamps()
+        public List<Stamping> GetStamps(string? matricola)
         {
-            return _context.Stampings.ToList();
+            if (matricola == null)
+                return _context.Stampings.ToList();
+            else
+                return _context.Stampings.Where(s => s.IdMatricola == matricola).ToList();
         }
 
         public bool AddStamp(Stamping stamp)
@@ -25,9 +29,9 @@ namespace rilevazioniPresenze.Reps.StampingFiles
             return _context.SaveChanges() > 0;
         }
 
-        public bool RemoveStamp(string idMatricola, ShiftType shiftType, DateTime orario)
+        public bool RemoveStamp(int key)
         {
-            var stamp = _context.Stampings.FirstOrDefault(s => s.IdMatricola == idMatricola && s.ShiftType == shiftType && s.Orario == orario);
+            var stamp = _context.Stampings.FirstOrDefault(s => s.Id == key);
 
             if (stamp != null)
             {
@@ -37,10 +41,19 @@ namespace rilevazioniPresenze.Reps.StampingFiles
             }
             return false;
         }
-
-        public Stamping? GetStampByKey(string idMatricola, ShiftType shiftType, DateTime orario)
+        public bool UpdateStamp(int key, StampingWithoutIdDTOs stamp)
         {
-            return _context.Stampings.FirstOrDefault(s => s.IdMatricola == idMatricola && s.ShiftType == shiftType && s.Orario == orario);
+            var dbStamp = _context.Stampings.FirstOrDefault(s => s.Id == key);
+            if (dbStamp != null)
+            {
+                dbStamp.IdMatricola = stamp.IdMatricola;
+                dbStamp.ShiftType = stamp.ShiftType;
+                dbStamp.Orario = stamp.Orario;
+
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
         }
     }
 }

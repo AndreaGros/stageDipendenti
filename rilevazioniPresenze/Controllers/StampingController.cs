@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using rilevazioniPresenzaData.Models;
@@ -18,14 +19,15 @@ namespace rilevazioniPresenze.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetStampings()
+        public IActionResult GetStampings(string? key)
         {
-            var stamps = _repo.GetStamps();
+            var stamps = _repo.GetStamps(key);
             List<StampingDTOs> stampsDTOsList = new();
             foreach (var stamp in stamps)
             {
                 stampsDTOsList.Add(new StampingDTOs
                 {
+                    Id=stamp.Id,
                     ShiftType = stamp.ShiftType,
                     Orario = stamp.Orario,
                     IdMatricola = stamp.IdMatricola
@@ -46,35 +48,25 @@ namespace rilevazioniPresenze.Controllers
             return _repo.AddStamp(stamp);
         }
 
-        [HttpDelete("{idMatricola}/{shiftType}/{orario}")]
-        public bool deleteStamping(string idMatricola, ShiftType shiftType, DateTime orario)
+        [HttpDelete("{key}")]
+        public bool deleteStamping(int key)
         {
-            return _repo.RemoveStamp(idMatricola, shiftType, orario);
+            return _repo.RemoveStamp(key);
         }
 
-        [HttpGet("{idMatricola}/{shiftType}/{orario}")]
-        public IActionResult GetStampingByKey(string idMatricola, ShiftType shiftType, DateTime orario)
+        [HttpPut("{key}")]
+        [Authorize]
+        public bool UpdateStamping(int key, StampingWithoutIdDTOs stampDTOs)
         {
-            
-            Stamping? stamp = _repo.GetStampByKey(idMatricola, shiftType, orario);
-            if (stamp == null)
-                return NotFound();
-
-            StampingDTOs stampDTOs = new StampingDTOs
-            {
-                ShiftType = stamp.ShiftType,
-                Orario = stamp.Orario,
-                IdMatricola = stamp.IdMatricola
-            };
-
-
-            return Ok(stampDTOs);
+            return _repo.UpdateStamp(key, stampDTOs);
         }
 
-        //[HttpPut]
-        //public bool UpdateStamping(ShiftType shiftType, DateTime orario)
-        //{
-        //    return _repo.UpdateStamp(shiftType, orario);
-        //}
+        [HttpGet("{key}")]
+        public IActionResult userPresence(string? key)
+        {
+            var stamps = _repo.GetStamps(key);
+
+            return NotFound();
+        }
     }
 }

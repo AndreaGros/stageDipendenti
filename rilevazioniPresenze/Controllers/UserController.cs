@@ -229,5 +229,11 @@ namespace rilevazioniPresenze.Controllers
             };
             return Ok(detailsUser);
         }
+
+        [HttpGet("ids")]
+        public IActionResult GetAllIds()
+        {
+            return Ok(_repo.GetIds());
+        }
     }
 }

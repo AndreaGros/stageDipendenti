@@ -32,7 +32,14 @@ namespace rilevazioniPresenzaData
                 .IsRequired();
             });
 
-            modelBuilder.Entity<Stamping>().HasKey(s => new { s.ShiftType, s.Orario, s.IdMatricola });
+            modelBuilder.Entity<Stamping>(entity =>
+            {
+                // Definisce 'Id' come nuova chiave primaria
+                entity.HasKey(s => s.Id);
+
+                // Specifica che il valore di 'Id' è generato dal database (auto-increment)
+                entity.Property(s => s.Id).ValueGeneratedOnAdd();
+            });
 
 
             modelBuilder.Entity<User>(builder =>
