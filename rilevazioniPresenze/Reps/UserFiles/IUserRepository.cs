@@ -13,7 +13,7 @@ namespace rilevazioniPresenza.Reps.UserFiles
         bool RemoveEmp(string key);
         bool UpdateEmp(DetailUserDTOs employer);
         User? GetUserByUsername(string username);
-
         List<string> GetIds();
+        List<UserShiftDTOs> GetShiftsByKey(string key);
     }
 }

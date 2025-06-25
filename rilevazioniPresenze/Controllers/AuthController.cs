@@ -34,7 +34,7 @@ namespace rilevazioniPresenze.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginDTOs LoginDTOs)
+        public IActionResult Login(LoginDTOs LoginDTOs)
         {
             //if (user.Username == "admin" && user.Password == "password")
             //{

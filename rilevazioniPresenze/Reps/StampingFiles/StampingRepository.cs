@@ -20,7 +20,7 @@ namespace rilevazioniPresenze.Reps.StampingFiles
             if (matricola == null)
                 return _context.Stampings.ToList();
             else
-                return _context.Stampings.Where(s => s.IdMatricola == matricola).ToList();
+                return _context.Stampings.Where(s => s.IdMatricola == matricola).OrderBy(s => s.Orario).ToList();
         }
 
         public bool AddStamp(Stamping stamp)

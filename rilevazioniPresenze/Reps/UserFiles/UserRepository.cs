@@ -30,7 +30,7 @@ namespace rilevazioniPresenza.Reps.UserFiles
             var query = _context.Users.AsQueryable();
             List<User> usersList;
 
-            if(filters.Stato_Lavorativo != null)
+            if (filters.Stato_Lavorativo != null)
                 query = query.Where(u => u.Stato_Lavorativo == filters.Stato_Lavorativo);
 
             if (filters.Provincia_Residenza != null)
@@ -128,6 +128,26 @@ namespace rilevazioniPresenza.Reps.UserFiles
         public List<string> GetIds()
         {
             return _context.Users.Select(u => u.Matricola).ToList();
+        }
+
+        public List<UserShiftDTOs> GetShiftsByKey(string key)
+        {
+            var user = _context.Users.Include(u => u.UserShifts).FirstOrDefault(u => u.Matricola == key);
+            if (user == null)
+                return null;
+            List<UserShiftDTOs> shifts = new();
+            foreach (var shift in user.UserShifts)
+            {
+                shifts.Add(new UserShiftDTOs
+                {
+                    Giorno = shift.Giorno,
+                    T1 = shift.T1,
+                    FT1 = shift.FT1,
+                    T2 = shift.T2,
+                    FT2 = shift.FT2
+                });
+            }
+            return shifts;
         }
     }
 }
