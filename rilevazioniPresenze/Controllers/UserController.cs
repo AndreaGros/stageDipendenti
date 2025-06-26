@@ -235,5 +235,11 @@ namespace rilevazioniPresenze.Controllers
         {
             return Ok(_repo.GetIds());
         }
+
+        [HttpGet("shifts/{key}")]
+        public IActionResult GetShifts(string key)
+        {
+            return Ok(_repo.GetShiftsByKey(key));
+        }
     }
 }

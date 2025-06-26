@@ -170,7 +170,7 @@ namespace rilevazioniPresenze.Controllers
                 if (shift == null)
                     continue;
 
-                var foundCouples = new List<(StampingDTOs In, StampingDTOs Out)>();
+                var foundCouples = new List<(StampingDTOs? In, StampingDTOs? Out)>();
 
                 foreach (var outStamp in outStamps)
                 {
@@ -186,30 +186,27 @@ namespace rilevazioniPresenze.Controllers
                         inStamps.Remove(closestIn);
                     }
                 }
+
                 foreach (var plusIn in inStamps)
-                {
                     foundCouples.Add((plusIn, null));
-                }
 
                 foreach (var couple in foundCouples)
                 {
                     bool respect = false;
 
-                    if (couple.In != null && couple.Out != null)
+                    if (couple.In != null && couple.Out != null && shift.T1 != null && shift.FT1 != null && shift.T2 != null && shift.FT2 != null )
                     {
-
                         TimeSpan orarioTimbratura = couple.In.Orario.TimeOfDay;
                         TimeSpan entrataMattina = shift.T1.Value.ToTimeSpan();
                         TimeSpan differenzaMattina = (orarioTimbratura - entrataMattina).Duration();
                         TimeSpan entrataPomeriggio = shift.T2.Value.ToTimeSpan();
                         TimeSpan differenzaPomeriggio = (orarioTimbratura - entrataPomeriggio).Duration();
-
+                        
                         TimeSpan orarioTimbraturaUscita = couple.Out.Orario.TimeOfDay;
                         TimeSpan uscitaMattina = shift.FT1.Value.ToTimeSpan();
                         TimeSpan differenzaUscitaMattina = (orarioTimbraturaUscita - uscitaMattina).Duration();
                         TimeSpan uscitaPomeriggio = shift.FT2.Value.ToTimeSpan();
                         TimeSpan differenzaUscitaPomeriggio = (orarioTimbraturaUscita - uscitaPomeriggio).Duration();
-
 
                         if (differenzaMattina <= differenzaPomeriggio)
                         {
@@ -221,15 +218,13 @@ namespace rilevazioniPresenze.Controllers
                             respect = true;
                     }
 
-
                     stampRespects.Add(new StampingRespectDTOs
                     {
-                        Couple = new StampingDTOs[] { couple.In, couple.Out },
+                        Couple = [couple.In, couple.Out],
                         Respect = respect
                     });
                 }
             }
-
             return Ok(stampRespects);
         }
     }
