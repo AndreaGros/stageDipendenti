@@ -23,6 +23,7 @@ namespace rilevazioniPresenze.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult GetStampings(string? key)
         {
             var stamps = _repo.GetStamps(key);
@@ -41,6 +42,7 @@ namespace rilevazioniPresenze.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public bool AddStamping(StampingDTOs stampDTOs)
         {
             Stamping stamp = new Stamping
@@ -53,6 +55,7 @@ namespace rilevazioniPresenze.Controllers
         }
 
         [HttpDelete("{key}")]
+        [Authorize]
         public bool deleteStamping(int key)
         {
             return _repo.RemoveStamp(key);
@@ -87,80 +90,6 @@ namespace rilevazioniPresenze.Controllers
 
             List<StampingRespectDTOs> stampRespects = new();
 
-            //StampingDTOs[] couples = new StampingDTOs[2];
-
-            //foreach (var group in groupedStamps)
-            //{
-            //    var respect = false;
-            //    var _group = group.ToList();
-            //    var usedStampIds = new HashSet<int>();
-            //    foreach (var stamp in group)
-            //    {
-            //        if (usedStampIds.Contains(stamp.Id))
-            //            continue;
-            //        DayOfWeek day = stamp.Orario.DayOfWeek;
-            //        TimeSpan orarioTimbratura = stamp.Orario.TimeOfDay;
-            //        var shift = shifts.FirstOrDefault(s => s.Giorno == day);
-            //        if (shift == null)
-            //            continue;
-            //        if (stamp.ShiftType == 0)
-            //        {
-            //            couples = new StampingDTOs[2];
-            //            TimeSpan entrataMattina = shift.T1.Value.ToTimeSpan();
-            //            TimeSpan differenzaMattina = (orarioTimbratura - entrataMattina).Duration();
-            //            TimeSpan entrataPomeriggio = shift.T2.Value.ToTimeSpan();
-            //            TimeSpan differenzaPomeriggio = (orarioTimbratura - entrataPomeriggio).Duration();
-
-
-            //            var outStamp = group.FirstOrDefault(s => (int)s.ShiftType == 1 && s.Orario > stamp.Orario);
-            //            if (outStamp != null)
-            //            {
-            //                usedStampIds.Add(outStamp.Id);
-            //                TimeSpan orarioTimbraturaUscita = outStamp.Orario.TimeOfDay;
-            //                TimeSpan uscitaMattina = shift.FT1.Value.ToTimeSpan();
-            //                TimeSpan differenzaUscitaMattina = (orarioTimbraturaUscita - uscitaMattina).Duration();
-            //                TimeSpan uscitaPomeriggio = shift.FT2.Value.ToTimeSpan();
-            //                TimeSpan differenzaUscitaPomeriggio = (orarioTimbraturaUscita - uscitaPomeriggio).Duration();
-            //                if (differenzaMattina <= differenzaPomeriggio)
-            //                    if (differenzaMattina <= TimeSpan.FromMinutes(30) || differenzaUscitaMattina <= TimeSpan.FromMinutes(30))
-            //                        respect = true;
-            //                    else
-            //                    if (differenzaPomeriggio <= TimeSpan.FromMinutes(30) || differenzaUscitaPomeriggio <= TimeSpan.FromMinutes(30))
-            //                        respect = true;
-            //                couples[0] = stamp;
-            //                couples[1] = outStamp;
-
-            //                stampRespects.Add(new StampingRespectDTOs
-            //                {
-            //                    Couple = couples,
-            //                    Respect = respect
-            //                });
-            //            }
-            //            else
-            //            {
-            //                couples[0] = stamp;
-            //                couples[1] = null;
-            //                stampRespects.Add(new StampingRespectDTOs
-            //                {
-            //                    Couple = couples,
-            //                    Respect = respect
-            //                });
-            //            }
-
-            //        }
-            //        else
-            //        {
-            //            couples[0] = null;
-            //            couples[1] = stamp;
-            //            stampRespects.Add(new StampingRespectDTOs
-            //            {
-            //                Couple = couples,
-            //                Respect = respect
-            //            });
-            //        }
-            //    }
-            //}
-
             foreach (var group in groupedStamps)
             {
                 var inStamps = group.Where(s => s.ShiftType == 0).ToList();
@@ -194,28 +123,61 @@ namespace rilevazioniPresenze.Controllers
                 {
                     bool respect = false;
 
-                    if (couple.In != null && couple.Out != null && shift.T1 != null && shift.FT1 != null && shift.T2 != null && shift.FT2 != null )
+                    if (couple.In != null && couple.Out != null)
                     {
                         TimeSpan orarioTimbratura = couple.In.Orario.TimeOfDay;
-                        TimeSpan entrataMattina = shift.T1.Value.ToTimeSpan();
-                        TimeSpan differenzaMattina = (orarioTimbratura - entrataMattina).Duration();
-                        TimeSpan entrataPomeriggio = shift.T2.Value.ToTimeSpan();
-                        TimeSpan differenzaPomeriggio = (orarioTimbratura - entrataPomeriggio).Duration();
-                        
-                        TimeSpan orarioTimbraturaUscita = couple.Out.Orario.TimeOfDay;
-                        TimeSpan uscitaMattina = shift.FT1.Value.ToTimeSpan();
-                        TimeSpan differenzaUscitaMattina = (orarioTimbraturaUscita - uscitaMattina).Duration();
-                        TimeSpan uscitaPomeriggio = shift.FT2.Value.ToTimeSpan();
-                        TimeSpan differenzaUscitaPomeriggio = (orarioTimbraturaUscita - uscitaPomeriggio).Duration();
 
-                        if (differenzaMattina <= differenzaPomeriggio)
+                        TimeSpan? entrataMattina = null;
+                        TimeSpan? entrataPomeriggio = null;
+                        TimeSpan? differenzaMattina = null;
+                        TimeSpan? differenzaPomeriggio = null;
+
+                        TimeSpan orarioTimbraturaUscita = couple.Out.Orario.TimeOfDay;
+                        TimeSpan? uscitaMattina = null;
+                        TimeSpan? differenzaUscitaMattina = null;
+                        TimeSpan? uscitaPomeriggio = null;
+                        TimeSpan? differenzaUscitaPomeriggio = null;
+
+                        if (shift.T1 != null && shift.FT1 != null)
                         {
-                            if (differenzaMattina <= TimeSpan.FromMinutes(30) || differenzaPomeriggio <= TimeSpan.FromMinutes(30))
+                            entrataMattina = shift.T1.Value.ToTimeSpan();
+                            uscitaMattina = shift.FT1.Value.ToTimeSpan();
+                            differenzaMattina = (orarioTimbratura - entrataMattina.Value).Duration();
+                            differenzaUscitaMattina = (orarioTimbraturaUscita - uscitaMattina.Value).Duration();
+                        }
+
+                        if (shift.T2 != null && shift.FT2 != null)
+                        {
+                            entrataPomeriggio = shift.T2.Value.ToTimeSpan();
+                            uscitaPomeriggio = shift.FT2.Value.ToTimeSpan();
+                            differenzaPomeriggio = (orarioTimbratura -entrataPomeriggio.Value).Duration();
+                            differenzaUscitaPomeriggio = (orarioTimbraturaUscita - uscitaPomeriggio.Value).Duration();
+                        }
+
+                        if (entrataMattina != null && entrataPomeriggio != null)
+                        {
+
+                            if (differenzaMattina <= differenzaPomeriggio)
+                            {
+                                if (differenzaMattina <= TimeSpan.FromMinutes(30) && differenzaUscitaMattina <= TimeSpan.FromMinutes(30))
+                                    respect = true;
+                            }
+                            else
+                            {
+                                if (differenzaPomeriggio <= TimeSpan.FromMinutes(30) && differenzaUscitaPomeriggio <= TimeSpan.FromMinutes(30))
+                                    respect = true;
+                            }
+                        }
+                        else if (entrataMattina != null)
+                        {
+                            if (differenzaMattina <= TimeSpan.FromMinutes(30) && differenzaUscitaMattina <= TimeSpan.FromMinutes(30))
                                 respect = true;
                         }
-                        else
-                            if (differenzaUscitaPomeriggio <= TimeSpan.FromMinutes(30) || differenzaUscitaPomeriggio <= TimeSpan.FromMinutes(30))
-                            respect = true;
+                        else if (entrataPomeriggio != null) 
+                        {
+                            if (differenzaPomeriggio <= TimeSpan.FromMinutes(30) && differenzaUscitaPomeriggio <= TimeSpan.FromMinutes(30))
+                                respect = true;
+                        }
                     }
 
                     stampRespects.Add(new StampingRespectDTOs
